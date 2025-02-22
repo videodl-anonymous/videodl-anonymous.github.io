@@ -1,0 +1,1057 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>VideoDL</title>
+    <link href="./asserts/style.css" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .caption {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .row2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .row3 {
+            display: flex;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .label {
+            writing-mode: vertical-rl;
+            text-align: center;
+            margin-right: 30px;
+        }
+
+        .label_method {
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .video-wrapper {
+            display: flex;
+            gap: 60px;
+        }
+
+        .video-wrapper2 {
+            display: flex;
+            gap: 100px;
+        }
+
+        .video-wrapper video,
+        .video-wrapper2 video {
+            width: 200px;
+            margin: 10px 0;
+        }
+
+        .text-wrapper {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-left: 20px;
+        }
+
+        .text-column {
+            flex: 1;
+            width: 210px;
+            padding-left: 30px;
+            box-sizing: border-box;
+        }
+
+        .text-column2 {
+            flex: 1;
+            width: 210px;
+            padding-left: 70px;
+            box-sizing: border-box;
+        }
+
+        .text-column3 {
+            flex: 1;
+            width: 210px;
+            padding-left: 70px;
+            box-sizing: border-box;
+        }
+
+        .text-column_line {
+            flex: 1;
+            padding-left: 30px;
+            box-sizing: border-box;
+        }
+
+        .text-column-ref1 {
+            flex: 1;
+            width: 50px;
+            padding-left: 400px;
+            box-sizing: border-box;
+        }
+
+        .text-column-ref2 {
+            flex: 1;
+            width: 50px;
+            padding-left: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+    <style>
+        /* Grok style */
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-stretch: 100%;
+            font-display: block;
+            font-weight: 300 700;
+            src: url('./assets/roboto.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        section.demos * {
+            box-sizing: border-box;
+        }
+
+        section.demos video {
+            aspect-ratio: 720 / 480;
+        }
+
+        section.demos {
+            font-family: "Roboto", sans-serif;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 1920px;
+        }
+
+        section.demos .content {
+            padding: 0 10%;
+        }
+
+        section.demos .button {
+            background-color: #ccc;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: background-color 0.5s;
+            text-decoration: none;
+            margin: 0 8px 8px 0;
+            display: inline-block;
+        }
+
+        section.demos .button:hover {
+            background-color: #fff;
+        }
+
+        section.demos section {
+            margin-top: 100px;
+        }
+
+        section.demos section:first-of-type {
+            margin-top: 0;
+        }
+
+        section.demos .title {
+            top: 0;
+            padding: 20px 10%;
+            font-size: 20px;
+            font-weight: 600;
+            z-index: 1000;
+            min-height: 60px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        section.demos .description {
+            padding: 0 10% 20px;
+            line-height: 25px;
+            font-weight: 300;
+        }
+
+        section.demos .highlight {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        section.demos .flex-row {
+            display: flex;
+            column-gap: 5px;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            padding: 0 5px 5px;
+        }
+
+        section.demos .flex-row>div {
+            flex-grow: 1;
+            flex-basis: 0;
+            position: relative;
+        }
+
+        section.demos .flex>div {
+            width: calc(100% / 3 - 5px * 2 / 3);
+            margin: 2.5px 0;
+            position: relative;
+        }
+
+        section.demos .flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0 5px;
+        }
+
+        section.demos .prompt-wrap {
+            position: relative;
+        }
+
+        section.demos .flex-2 {
+            justify-content: center;
+            column-gap: 5px;
+        }
+
+        section.demos .flex-2>div {
+            width: calc(100% / 2 - 5px / 2);
+            min-width: calc(100% / 3 - 5px * 2 / 3);
+            max-width: calc(100vh - 200px);
+        }
+
+        section.demos video,
+        section.demos img {
+            width: 100%;
+        }
+
+        section.demos .loading-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        section.demos .loading-text {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        section.demos .loading-icon {
+            font-size: 48px;
+        }
+
+        section.demos .prompt {
+            max-width: calc(100% - 20px);
+            position: absolute;
+            background: rgba(0, 0, 0, 0.5);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 10px;
+            backdrop-filter: blur(10px);
+            bottom: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+            box-sizing: border-box;
+        }
+
+        @media (hover: hover) {
+            section.demos .prompt-wrap:hover .prompt {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section.demos .flex-dynamic>div {
+                width: calc(100% / 2 - 5px / 2);
+            }
+        }
+
+        @media (max-width: 512px) {
+            section.demos .flex-dynamic>div {
+                width: 100%;
+            }
+
+            section.demos .content {
+                padding: 0 12px;
+            }
+
+            section.demos .description {
+                padding: 0 12px 20px;
+            }
+
+            section.demos .title {
+                padding: 20px 12px;
+            }
+        }
+
+        .video-container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .video-container .row {
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            position: relative;
+        }
+
+        .video-container .label {
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            min-width: 30px;
+            writing-mode: vertical-rl;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .video-container .video-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .video-container video {
+            width: calc(33.33% - 14px);
+            min-width: 280px;
+            aspect-ratio: 720/480;
+            /* background: #000; */
+        }
+
+        .video-container .text-column {
+            width: calc(33.33% - 14px);
+            min-width: 280px;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 14px;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        @media (max-width: 1200px) {
+
+            .video-container video,
+            .video-container .text-column {
+                width: calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .video-container video,
+            .video-container .text-column {
+                width: 100%;
+            }
+
+            .video-container .label {
+                left: -30px;
+                font-size: 16px;
+            }
+        }
+
+        .content p {
+            width: 80%;
+            margin: 10 auto;
+            line-height: 1.6;
+        }
+
+        .video-row {
+            display: flex;
+            /* justify-content: center; */
+            gap: 10px;
+            margin: 20px auto;
+            max-width: 100%;
+        }
+
+        .video-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 25%;
+        }
+
+        .video-column:not(:last-child) video {
+            /* width: 100%; */
+            height: 260px;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
+        .video-column:last-child video {
+            /* width: 100%; */
+            height: 260px;
+            aspect-ratio: 720/480;
+            object-fit: cover;
+        }
+
+        .label_method {
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .video-row {
+                flex-wrap: wrap;
+            }
+
+            .video-column {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <h1><strong>VideoDL: Video Generation with Coarse-Grained Language Models and Fine-Grained Diffusion
+                Models</strong></h1>
+        <br>
+    </div>
+    <div class="content">
+        <h2 style="text-align:center;">Abstract</h2>
+        <p>Recent advancements in text-to-video (T2V) generation have been driven by two competing paradigms:
+            autoregressive language models for temporal coherence and diffusion models for visual quality. However, each
+            approach faces fundamental limitations - autoregressive methods suffer from error accumulation in long
+            sequences, while diffusion models struggle with temporal consistency. In this work, we propose VideoDL, a
+            hybrid framework that synergizes the strengths of both paradigms through coarse-to-fine generation. Our
+            architecture introduces three key innovations: (1) A semantic tokenizer that compresses 3D visual features
+            into compact 1D discrete representations through efficient semantic compression, achieving a ~13,903×
+            compression ratio; (2) A language model that generates semantic blueprints with high-level semantic
+            relationships; (3) A streaming diffusion model that refines coarse semantics into high-fidelity videos.
+            Experiments show that VideoDL, a 5B model, achieves a score of 83.61 on the VBench T2V benchmark, surpassing
+            the current state-of-the-art open-source models Hunyuan Video (13B) and other commercial models such as
+            MiniMax Video, Gen-3, and Vidu. In addition, our model also achieves state-of-the-art performance in long
+            video generation, surpassing other open-source models in this field.</p>
+    </div>
+    <div class="content">
+        <h2 style="text-align:center;">Overview</h2>
+        <img class="summary-img" src="./asserts/images/model.jpg" style="width:60%;">
+        <p> The architecture of the VideoDL model. Given text inputs, we extract text embedding and use an LLM to
+            generate semantic tokens in the first stage. Then we use a diffusion model to generate the final video which
+            use semantic tokens as conditions.</p>
+    </div>
+
+    <section id="video" class="demos">
+        <div class="title">
+            Text-to-Video Generation Demos
+        </div>
+        <!-- <div class="description">
+            We present a collection of video generation demos created using the Goku model.
+            For a fair comparison, we use the original MovieGenBench prompts without any modifications.
+            The full set is available in the <a
+                href='https://huggingface.co/datasets/saiyan-world/Goku-MovieGenBench'>🤗 Goku MovieGenBench</a>.
+            Please wait a moment for the video to load ☕☕.
+        </div> -->
+
+        <div class="flex flex-dynamic">
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/cb5d80182f8fe538775c87da73fc17a426245d1e86a218e148e1155a.mp4"></video>
+                <div class="prompt">A majestic lion, with its fur shimmering in the golden light, stands on a rocky
+                    outcrop, exuding regal power against the backdrop of a breathtaking sunset. The camera captures a
+                    low-angle view, emphasizing the lion's imposing stature and the vast expanse of the horizon. The
+                    lion's piercing eyes gaze into the distance, reflecting a sense of wisdom and authority. As the sun
+                    dips below the horizon, the lion's silhouette is framed against the vibrant hues of the sky,
+                    creating a captivating scene that showcases the raw beauty and strength of this magnificent
+                    creature.</div>
+            </div>
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/1025212555484361222543592_103_1516525842.mp4"></video>
+                <div class="prompt">A vintage 1980s kitchen, with checkered floor tiles and pastel-colored appliances,
+                    is the setting for a surreal scene. In the center, an ostrich stands tall, its feathers a stark
+                    contrast against the dated decor. The camera slowly pushes in, capturing the ostrich's curious gaze
+                    as it peers around the room, its long neck gracefully arching. The lighting is soft and warm,
+                    casting a nostalgic glow over the scene. The camera continues to move closer, the focus shifting
+                    from the room to the ostrich, until its large, expressive eyes fill the frame, a symbol of the
+                    strange and unexpected in the mundane.</div>
+            </div>
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/626743004596151660631257_358_697095427.mp4"></video>
+                <div class="prompt">A close-up shot reveals a clear glass container filled with water, with a dropper
+                    poised above it. The dropper releases a golden stream of olive oil, which descends into the water,
+                    forming a mesmerizing, slow-motion dance. The oil gradually separates into distinct droplets, each
+                    suspended in the water, creating a captivating interplay of light and shadow. Next, a second dropper
+                    introduces a dark stream of balsamic vinegar, which cascades into the container, mingling with the
+                    oil droplets and forming intricate patterns. The camera captures the fascinating interaction between
+                    the two fluids, as they swirl and separate, highlighting the unique properties of oil and vinegar.
+                </div>
+            </div>
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/559916943675374676580046_807_4094793464.mp4"></video>
+                <div class="prompt">A camera slowly tilts upward from the base of a towering, intricately-carved marble
+                    statue, revealing its grandeur and craftsmanship. The statue, dressed in ancient robes, stands in a
+                    sunlit square, its majestic head adorned with a laurel wreath. As the camera moves, the statue's
+                    detailed features, including its strong jawline and piercing eyes, become more prominent. The
+                    sunlight casts dramatic shadows on the statue's face, highlighting the artist's skill. The final
+                    shot captures the statue's serene expression, as if it's surveying its domain with wisdom and
+                    authority.</div>
+            </div>
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/304586930582473081225226_6_3072196660.mp4"></video>
+                <div class="prompt">A close-up shot of a Victoria crowned pigeon reveals its striking blue plumage and
+                    red chest, with a delicate, lacy crest and striking red eyes. The bird tilts its head slightly,
+                    exuding regality and majesty. The background is blurred, drawing attention to the bird's striking
+                    appearance. The pigeon's feathers shimmer under the soft lighting, highlighting its majestic
+                    stature. The camera slowly zooms in, capturing the intricate details of the bird's plumage and the
+                    subtle movements of its head. The pigeon's eye, a deep, captivating red, seems to hold a story of
+                    its own. The video ends with a slow, graceful movement of the bird's head, leaving a lasting
+                    impression of its regal presence.</div>
+            </div>
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/206531926790111493017625_3_2316226627.mp4"></video>
+                <div class="prompt">A drone captures the breathtaking view of waves crashing against the rugged cliffs
+                    along Big Sur's Garrapata State Park beach. The blue waters create white-tipped waves, while the
+                    golden light of the setting sun illuminates the rocky shore. A small island with a lighthouse sits
+                    in the distance, and green shrubbery covers the cliff's edge. The steep drop from the road down to
+                    the beach is a dramatic feat, with the cliff's edges jutting out over the sea. This is a view that
+                    captures the raw beauty of the coast and the rugged landscape of the Pacific Coast Highway.</div>
+            </div>
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/85258677229836188764330_32_1195100372.mp4"></video>
+                <div class="prompt">A group of playful golden retriever puppies, with their fluffy fur and sparkling
+                    eyes, frolic in a pristine snow-covered field. Their heads pop out of the snow, covered in white
+                    powder, as they joyfully wrestle and tumble, their tails wagging with excitement. The puppies, with
+                    their warm golden coats, are a stark contrast against the snowy landscape, creating a heartwarming
+                    scene. As they play, their faces are covered in snow, making them look like little snowballs, adding
+                    to the charm of the moment.</div>
+            </div>
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/470262412442053685786002_587_3732387260.mp4"></video>
+                <div class="prompt">A whimsical hedgehog, dressed in a miniature knight's armor, complete with a helmet
+                    and shield, is seen riding a toy horse towards a grand, medieval castle. The hedgehog's armor is
+                    polished and gleaming, and the toy horse is painted in a realistic manner, with a flowing mane and
+                    tail. As the hedgehog approaches the castle, the drawbridge is lowered, revealing the castle's
+                    entrance, adorned with intricate stone carvings and a large wooden door. The hedgehog's journey is
+                    set against a backdrop of a lush, green forest, with the sun setting in the distance, casting a
+                    warm, golden glow over the scene.</div>
+            </div>
+            <!-- <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+            <div class="loading-placeholder">
+                <div class="loading-text">Loading...</div>
+                <div class="loading-icon">☕</div>
+            </div>
+            <video autoplay playsinline muted loop onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';" src="./asserts/VideoDL_videos/242734998979735251488973_715_628265207.mp4"></video>
+            <div class="prompt">A breathtaking view of a majestic snowy mountain peak is reflected in a pristine alpine lake, creating a flawless mirror image. The sun's rays cast a subtle shimmering effect on the water's surface, enhancing the serene ambiance. The camera captures the scene from a distance, highlighting the symmetry and beauty of nature's perfect reflection. The mountain's snow-capped peak, the lake's clear waters, and the shimmering effect all contribute to a mesmerizing and tranquil atmosphere.</div>
+        </div> -->
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/686184777047530087769539_8_1964631533.mp4"></video>
+                <div class="prompt">A young man in his 20s, wearing a casual white t-shirt and blue jeans, sits on a
+                    fluffy white cloud in a clear blue sky, engrossed in a hardcover book. His brown hair is tousled,
+                    and he sports a pair of black-rimmed glasses. The sun casts a warm glow on his face, highlighting
+                    his focused expression. As he reads, a gentle breeze rustles the pages of the book, and the cloud
+                    slowly drifts across the sky, creating a serene and whimsical scene.</div>
+            </div>
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/843335664382246757978983_69_1238487953.mp4"></video>
+                <div class="prompt">A close-up shot reveals a vibrant blue parrot, its feathers shimmering with an
+                    iridescent glow as they catch the sunlight, showcasing the bird's unique plumage and dazzling
+                    colors. The parrot's feathers are a rich, deep blue, with hints of green and purple, creating a
+                    mesmerizing visual effect. The bird's eyes are a striking contrast, a piercing orange that seems to
+                    hold a depth of wisdom. The camera slowly pans over the parrot's body, capturing the intricate
+                    patterns and the way the feathers seem to dance with each movement. The video ends with a close-up
+                    of the parrot's beak, a vibrant red that complements the blue feathers, as it opens its mouth to
+                    reveal a bright yellow tongue, completing the stunning display of this magnificent creature's
+                    vibrant colors.</div>
+            </div>
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/991878424292337451451906_1_3977168428.mp4"></video>
+                <div class="prompt">A group of majestic woolly mammoths, their fur a stark contrast against the snow,
+                    tread through a pristine meadow, their long, woolly coats gently swaying in the breeze. In the
+                    distance, snow-dusted trees and dramatic, snow-capped mountains create a breathtaking backdrop. The
+                    mid-afternoon light filters through wispy clouds, casting a warm glow over the scene. The camera,
+                    positioned low, captures the grandeur of these colossal creatures with stunning clarity, the depth
+                    of field accentuating their size and the vastness of the landscape.</div>
+            </div>
+            <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                <div class="loading-placeholder">
+                    <div class="loading-text">Loading...</div>
+                    <div class="loading-icon">☕</div>
+                </div>
+                <video autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                    src="./asserts/VideoDL_videos/452163408065252219388965_201_4209214543.mp4"></video>
+                <div class="prompt">A young child, wearing a vibrant red birthday hat, stands before a beautifully
+                    decorated cake with seven colorful candles, their face glowing with anticipation. As they take a
+                    deep breath and blow out the candles with a burst of joy, their eyes widen with excitement, and
+                    their cheeks flush with happiness. The room is filled with laughter and applause from family and
+                    friends, creating a warm and joyful atmosphere. The child's face, now lit by the soft glow of the
+                    cake's remaining flames, reflects pure delight and wonder, capturing the essence of a magical
+                    birthday moment.</div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="content video-container">
+        <h2 style="text-align:center;">Text-to-Video Results</h2>
+        <div class="row">
+            <div class="label">CogVideoX</div>
+            <div class="video-wrapper">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source
+                        src="./asserts/CogVideoX_videos/833dd64d76997efa74c2ed0b0a9678ba56e0839b903710d58f02a620.mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/CogVideoX_videos/382106989029666394911021_264_1408414039.mp4"
+                        type="video/mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/CogVideoX_videos/31211933221209806999685_644_3761508527.mp4"
+                        type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">VideoDL</div>
+            <div class="video-wrapper">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_videos/833dd64d76997efa74c2ed0b0a9678ba56e0839b903710d58f02a620.mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_videos/382106989029666394911021_264_1408414039.mp4" type="video/mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_videos/31211933221209806999685_644_3761508527.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="row">
+            <div class="video-wrapper">
+                <div class="text-column">
+                    "A sleek white sailboat glides gracefully across a calm, azure sea, its sails billowing gently in
+                    the breeze. Above, a silver airplane soars through a clear blue sky, its contrail stretching behind
+                    like a delicate ribbon. The boat's hull reflects the sunlight, creating a shimmering effect on the
+                    water's surface. The airplane, seen in a high-altitude flyover, casts a shadow that momentarily
+                    aligns with the boat's path, creating a fleeting connection between sea and sky. The scene is
+                    captured in a wide shot, ensuring both the boat and airplane are prominently centered, emphasizing
+                    their contrasting yet harmonious presence in the vast expanse."
+                </div>
+                <div class="text-column">
+                    "A life-sized ice sculpture of a playful dog, with intricate details and a joyful expression, stands
+                    in the middle of a sunlit, grassy field on a sweltering summer day. The ice dog, initially solid and
+                    vibrant, begins to melt under the relentless heat, with droplets of water forming on its surface. As
+                    the day progresses, the ice dog's form gradually diminishes, with its once sharp features becoming
+                    blurred and distorted. The melting process accelerates, and the ice dog's body starts to collapse,
+                    pooling into a puddle of water on the ground. By the end of the day, all that remains is a shallow
+                    puddle, reflecting the cloudless sky, with the memory of the once majestic ice dog now just a
+                    memory."
+                </div>
+                <div class="text-column">
+                    "Two vibrant hot air balloons, one red and the other blue, are seen soaring through a clear blue
+                    sky, their baskets gently bumping against each other mid-air. The red balloon features intricate
+                    gold patterns on its surface, while the blue balloon boasts a white and silver design. As they
+                    collide, the passengers in the baskets, dressed in casual attire, react with surprise and
+                    excitement. The scene is set against a backdrop of a picturesque landscape, with lush green hills
+                    and a sparkling river below. The balloons' vibrant colors contrast beautifully with the azure sky,
+                    creating a visually stunning and dynamic scene."
+                </div>
+            </div>
+        </div>
+
+        <!-- next row -->
+        <div class="row">
+            <div class="label">CogVideoX</div>
+            <div class="video-wrapper">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/CogVideoX_videos/1154116679531073278033630_791_2468593416.mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/CogVideoX_videos/242734998979735251488973_715_628265207.mp4"
+                        type="video/mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source
+                        src="./asserts/CogVideoX_videos/ec8f3cf104eede03a9bb07f7aa7b1ac66088a94a4c6e0aadcb6f0686.mp4"
+                        type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">VideoDL</div>
+            <div class="video-wrapper">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_videos/1154116679531073278033630_791_2468593416.mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_videos/242734998979735251488973_715_628265207.mp4" type="video/mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_videos/ec8f3cf104eede03a9bb07f7aa7b1ac66088a94a4c6e0aadcb6f0686.mp4"
+                        type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="row">
+            <div class="video-wrapper">
+                <div class="text-column">
+                    "A large, red truck with a white trailer moves past a row of wind turbines in a vast, open field,
+                    with the blades spinning gracefully in the breeze. The truck's driver, wearing a blue cap and a grey
+                    jacket, is seen from behind, focused on the road ahead. The camera then shifts to a close-up of the
+                    spinning turbine blades, capturing their elegant motion against the clear blue sky. As the truck
+                    continues to drive, the camera captures the serene landscape, with the wind turbines becoming
+                    smaller in the distance, emphasizing the vastness of the open field."
+                </div>
+                <div class="text-column">
+                    "A breathtaking view of a majestic snowy mountain peak is reflected in a pristine alpine lake,
+                    creating a flawless mirror image. The sun's rays cast a subtle shimmering effect on the water's
+                    surface, enhancing the serene ambiance. The camera captures the scene from a distance, highlighting
+                    the symmetry and beauty of nature's perfect reflection. The mountain's snow-capped peak, the lake's
+                    clear waters, and the shimmering effect all contribute to a mesmerizing and tranquil atmosphere."
+                </div>
+                <div class="text-column">
+                    "Two vibrant hot air balloons, one red and the other blue, are seen soaring through a clear blue
+                    sky, their baskets gently bumping against each other mid-air. The red balloon features intricate
+                    gold patterns on its surface, while the blue balloon boasts a white and silver design. As they
+                    collide, the passengers in the baskets, dressed in casual attire, react with surprise and
+                    excitement. The scene is set against a backdrop of a picturesque landscape, with lush green hills
+                    and a sparkling river below. The balloons' vibrant colors contrast beautifully with the azure sky,
+                    creating a visually stunning and dynamic scene."
+                </div>
+            </div>
+        </div>
+
+        <!-- next row -->
+        <div class="row">
+            <div class="label">CogVideoX</div>
+            <div class="video-wrapper">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source
+                        src="./asserts/CogVideoX_videos/1826f4d2eb09e80b7e53e1cc3fef3f85ef1b8825405fb8ca4c03eb23.mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/CogVideoX_videos/299926093401266940802727_0_2586572497.mp4" type="video/mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source
+                        src="./asserts/CogVideoX_videos/a06f6077d45f097b46f833f14d799bae0eefadccc363e5697dedcace.mp4"
+                        type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">VideoDL</div>
+            <div class="video-wrapper">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_videos/1826f4d2eb09e80b7e53e1cc3fef3f85ef1b8825405fb8ca4c03eb23.mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_videos/299926093401266940802727_0_2586572497.mp4" type="video/mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_videos/a06f6077d45f097b46f833f14d799bae0eefadccc363e5697dedcace.mp4"
+                        type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="row">
+            <div class="video-wrapper">
+                <div class="text-column">
+                    "A sleek, modern train glides effortlessly over a towering steel bridge, its polished exterior
+                    reflecting the golden hues of the setting sun. The bridge, an architectural marvel, spans a deep,
+                    verdant valley, with lush forests and a winding river far below. As the train moves, its rhythmic
+                    clatter harmonizes with the distant calls of birds and the gentle rustling of leaves. The scene
+                    shifts to a close-up of the train's wheels, showcasing their precision and power as they navigate
+                    the intricate lattice of the bridge. Finally, the camera pans out to reveal the entire bridge, a
+                    majestic structure silhouetted against a vibrant, twilight sky, with the train continuing its
+                    journey into the horizon."
+                </div>
+                <div class="text-column">
+                    "A breathtaking view of a majestic snowy mountain peak is reflected in a pristine alpine lake,
+                    creating a flawless mirror image. The sun's rays cast a subtle shimmering effect on the water's
+                    surface, enhancing the serene ambiance. The camera captures the scene from a distance, highlighting
+                    the symmetry and beauty of nature's perfect reflection. The mountain's snow-capped peak, the lake's
+                    clear waters, and the shimmering effect all contribute to a mesmerizing and tranquil atmosphere."
+                </div>
+                <div class="text-column">
+                    "A group of silver-colored fish with darker fins swim among green aquatic plants in an aquarium
+                    setting. The fish move gracefully through the water, navigating around the plants, which are of
+                    various sizes and shades of green. The aquarium environment is designed to mimic a natural habitat,
+                    with rocks and shadows in the background contributing to the underwater scene."
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="content long_video">
+        <h2 style="text-align:center;">Long Video Results</h2>
+        <div class="video-row">
+            <div class="video-column">
+                <div class="label_method">StreamingT2V</div>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/streamt2v_long/a dog drinking water.mp4"></video>
+            </div>
+            <div class="video-column">
+                <div class="label_method">FreeNoise</div>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/freenoise_long/a dog drinking water.mp4"></video>
+            </div>
+            <div class="video-column">
+                <div class="label_method">OpenSora</div>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/opensora_long/a dog drinking water.mp4"></video>
+            </div>
+            <div class="video-column">
+                <div class="label_method">VideoDL</div>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/VideoDL_long/a dog drinking water.mp4"></video>
+            </div>
+        </div>
+        <div class="text-column_line">
+            "a dog drinking water."
+        </div>
+        <div class="video-row">
+            <div class="video-column">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/streamt2v_long/a boat accelerating to gain speed.mp4"></video>
+            </div>
+            <div class="video-column">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/freenoise_long/a boat accelerating to gain speed.mp4"></video>
+            </div>
+            <div class="video-column">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/opensora_long/a boat accelerating to gain speed.mp4"></video>
+            </div>
+            <div class="video-column">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/VideoDL_long/a boat accelerating to gain speed.mp4"></video>
+            </div>
+        </div>
+        <div class="text-column_line">
+            "a boat accelerating to gain speed."
+        </div>
+        <div class="video-row">
+            <div class="video-column">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/streamt2v_long/a car accelerating to gain speed.mp4"></video>
+            </div>
+            <div class="video-column">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/freenoise_long/a car accelerating to gain speed.mp4"></video>
+            </div>
+            <div class="video-column">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/opensora_long/a car accelerating to gain speed.mp4"></video>
+            </div>
+            <div class="video-column">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';"
+                    src="./asserts/VideoDL_long/a car accelerating to gain speed.mp4"></video>
+            </div>
+        </div>
+        <div class="text-column_line">
+            "a car accelerating to gain speed."
+        </div>
+    </div>
+
+    <div class="content video-container">
+        <h2 style="text-align:center;">Video Reconstruction Results</h2>
+        <div class="row">
+            <div class="label">Reference Video</div>
+            <div class="video-wrapper">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/Origin_videos/24621810613491321401501.mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/Origin_videos/593531002868682125009980.mp4" type="video/mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/Origin_videos/614112236664254453288687.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">Reconstruction Video</div>
+            <div class="video-wrapper">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_rc/24621810613491321401501.mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_rc/593531002868682125009980.mp4" type="video/mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_rc/614112236664254453288687.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <!-- next row -->
+        <div class="row">
+            <div class="label">Reference Video</div>
+            <div class="video-wrapper">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/Origin_videos/718559466868105636511743.mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/Origin_videos/1065853988985626868357492.mp4" type="video/mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/Origin_videos/737078095191790670402844.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">Reconstruction Video</div>
+            <div class="video-wrapper">
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_rc/718559466868105636511743.mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_rc/1065853988985626868357492.mp4" type="video/mp4">
+                </video>
+                <video controls autoplay playsinline muted loop
+                    onloadeddata="this.style.display='block'; this.previousElementSibling?.style.display='none';">
+                    <source src="./asserts/VideoDL_rc/737078095191790670402844.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
